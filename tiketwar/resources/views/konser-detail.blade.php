@@ -14,6 +14,18 @@
             <p class="mb-1">Harga: Rp{{ number_format($konser['harga'], 0, ',', '.') }}</p>
             <p>Sisa tiket: {{ $konser['sisa'] }}</p>
 
+            @if ($konser['sisa'] > 0 && $konser['sisa'] < 10)
+                @include('partials.alert', [
+                    'tipe' => 'warning',
+                    'pesan' => 'Perhatian! Tiket konser hampir habis.'
+                ])
+            @elseif ($konser['sisa'] == 0)
+                @include('partials.alert', [
+                    'tipe' => 'danger',
+                    'pesan' => 'Maaf, tiket konser sudah habis.'
+                ])
+            @endif
+
             @if ($konser['sisa'] > 0)
                 <button class="btn btn-primary">War Tiket Sekarang</button>
             @else

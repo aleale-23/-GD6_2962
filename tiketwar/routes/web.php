@@ -75,3 +75,4 @@ Route::get('/konser/{id}', function ($id) use ($daftarKonser){
 
 // Route tentang
 Route::view('/tentang', 'about')->name('tentang');
+Route::view('/kontak', 'kontak')->name('kontak');
