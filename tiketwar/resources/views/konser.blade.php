@@ -16,6 +16,7 @@
                 <th>Harga</th>
                 <th>Sisa</th>
                 <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
 
@@ -39,7 +40,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="text-center">
+                    <td colspan="7" class="text-center">
                         Belum ada konser.
                     </td>
                 </tr>

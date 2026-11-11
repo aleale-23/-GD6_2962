@@ -36,8 +36,12 @@ Route::get('/konser', function () use ($daftarKonser) {
 })->name('konser.index');
 
 // Route detail konser
-Route::get('/konser/{id}', function ($id) {
-    return 'Detail konser nomor ' . $id;
+Route::get('/konser/{id}', function ($id) use ($daftarKonser){
+    abort_unless(isset($daftarKonser[$id]), 404);
+    return view('konser-detail', [
+        'id' => $id,
+        'konser' => $daftarKonser[$id],
+    ]);
 })->whereNumber('id')->name('konser.detail');
 
 // Route tentang
