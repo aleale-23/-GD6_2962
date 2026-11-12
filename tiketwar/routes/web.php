@@ -42,7 +42,7 @@ Route::post('/konser/{konser}/pesan', [PesananController::class, 'store'])
 Route::get('/pesanan', [PesananController::class, 'index'])
     ->name('pesanan.index');
 
-Route::get('/pesanan/{pesanan}/bayar', [PesananController::class, 'bayar'])
+Route::patch('/pesanan/{pesanan}/bayar', [PesananController::class, 'bayar'])
     ->whereNumber('pesanan')->name('pesanan.bayar');
 
 Route::patch('/pesanan/{pesanan}/batal', [PesananController::class, 'batal'])
