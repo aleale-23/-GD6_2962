@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\KonserController; // BARU
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\KonserController; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,3 +32,9 @@ Route::delete('/konser/{id}', [KonserController::class, 'destroy'])
     ->whereNumber('id')->name('konser.destroy'); 
 
 Route::view('/kontak', 'kontak')->name('kontak');
+
+Route::get('/konser/{id}/pesan', [PesananController::class, 'create'])
+    ->whereNumber('id')->name('pesanan.create');
+
+Route::post('/konser/{konser}/pesan', [PesananController::class, 'store'])
+    ->whereNumber('konser')->name('pesanan.store');
