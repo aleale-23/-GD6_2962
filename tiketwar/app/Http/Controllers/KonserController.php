@@ -24,7 +24,7 @@ class KonserController extends Controller
         return view('konser-detail', compact('konser'));
     }
 
-    // BARU: menampilkan form tambah
+   
     public function create(): View
     {
         $daftarPromotor = Promotor::orderBy('nama')->get();
@@ -32,7 +32,7 @@ class KonserController extends Controller
         return view('konser-create', compact('daftarPromotor'));
     }
 
-    // BARU: menyimpan data dari form
+  
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
@@ -49,4 +49,36 @@ class KonserController extends Controller
         return redirect()->route('konser.index')
             ->with('success', 'Konser berhasil ditambahkan.');
     }
+
+
+  
+    public function edit($id): View
+    {
+        $konser = Konser::findOrFail($id);
+        $daftarPromotor = Promotor::orderBy('nama')->get();
+
+        return view('konser-edit', compact('konser', 'daftarPromotor'));
+    }
+
+    
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $konser = Konser::findOrFail($id);
+
+        $data = $request->validate([
+            'promotor_id' => ['required', 'exists:promotors,id'],
+            'nama'        => ['required', 'string', 'max:255'],
+            'kota'        => ['required', 'string', 'max:100'],
+            'harga'       => ['required', 'integer', 'min:0'],
+            'sisa'        => ['required', 'integer', 'min:0'],
+            'tanggal'     => ['required', 'date'],
+        ]);
+
+        $konser->update($data);
+
+        return redirect()->route('konser.index')
+            ->with('success', 'Konser berhasil diubah.');
+    }
+
+
 }
