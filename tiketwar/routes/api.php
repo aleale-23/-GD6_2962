@@ -34,4 +34,14 @@ Route::middleware('auth:sanctum')->group(function () {
         ->middleware('abilities:pesanan:baca')
         ->name('api.admin.pesanan.index');
 
+    // API CRUD konser untuk admin
+    Route::post('/konser', [KonserController::class, 'store'])
+        ->name('api.konser.store');
+
+    Route::put('/konser/{konser}', [KonserController::class, 'update'])
+        ->name('api.konser.update');
+
+    Route::delete('/konser/{konser}', [KonserController::class, 'destroy'])
+        ->name('api.konser.destroy');
+
 });

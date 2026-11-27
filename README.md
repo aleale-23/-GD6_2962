@@ -27,3 +27,8 @@ Token yang tidak pernah kedaluwarsa berbahaya apabila bocor karena pihak yang ti
 Apabila perintah php artisan migrate:fresh --seed dijalankan kembali, seluruh tabel database beserta datanya akan dihapus, kemudian dibuat ulang melalui migration dan diisi kembali melalui seeder. AdminSeeder akan membaca nilai ADMIN_PASSWORD dari file .env untuk membuat akun admin.
 
 Akibatnya, kata sandi baru yang sebelumnya diubah melalui halaman ganti kata sandi akan hilang dan kata sandi admin kembali mengikuti nilai ADMIN_PASSWORD pada file .env. Oleh karena itu, apabila file .env belum diperbarui, admin harus kembali menggunakan kata sandi lama setelah proses migration dan seeding selesai.
+
+## Soal 5 
+Status HTTP 204 No Content digunakan karena proses penghapusan data berhasil dilakukan tanpa perlu mengembalikan isi respons kepada klien. Berbeda dengan status 200 OK yang umumnya disertai data atau pesan hasil pemrosesan, status 204 menunjukkan bahwa permintaan berhasil tetapi tidak memiliki response body. Penggunaan status 204 sesuai dengan karakteristik operasi DELETE ketika tidak ada data tambahan yang perlu dikirimkan.
+
+Konser yang sudah memiliki pesanan tidak boleh dihapus karena terdapat hubungan antara tabel konsers dan tabel pesanans melalui foreign key konser_id. Apabila konser tersebut dihapus, data pesanan akan kehilangan referensi terhadap konser yang dipesan. Hal tersebut dapat mengganggu integritas database, riwayat transaksi, dan laporan penjualan. Oleh karena itu, sistem menolak penghapusan konser yang memiliki pesanan menggunakan status HTTP 409 Conflict.
