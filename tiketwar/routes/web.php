@@ -5,6 +5,7 @@ use App\Http\Controllers\KonserController;
 use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\AkunController;
 
 // Halaman utama
 Route::get('/', function () {
@@ -56,6 +57,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/laporan/pdf', [LaporanController::class, 'pdf'])
         ->name('laporan.pdf');
+    
+    // Ganti kata sandi admin
+    Route::get('/akun/password', [AkunController::class, 'edit'])
+        ->name('akun.password');
+
+    Route::put('/akun/password', [AkunController::class, 'update'])
+        ->name('akun.password.update');
 });
 
 Route::view('/tentang', 'about')->name('tentang');

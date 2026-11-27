@@ -18,3 +18,12 @@ Filter tersebut aman dari SQL injection karena Laravel Eloquent menggunakan meka
 Status HTTP 401 Unauthorized menunjukkan bahwa pengguna belum berhasil diautentikasi karena tidak menyertakan token, menggunakan token yang tidak valid, atau menggunakan token yang sudah dicabut. Sementara itu, status HTTP 403 Forbidden menunjukkan bahwa pengguna telah berhasil diautentikasi menggunakan token yang valid, tetapi tidak memiliki hak akses yang diperlukan untuk mengakses endpoint tertentu.
 
 Dalam pengujian ini, permintaan tanpa token atau dengan token tidak valid menghasilkan status 401. Token yang memiliki ability konser:baca menghasilkan status 403 ketika digunakan untuk mengakses endpoint /api/admin/pesanan, karena endpoint tersebut membutuhkan ability pesanan:baca. Adapun token dengan ability pesanan:baca menghasilkan status 200 OK karena memenuhi persyaratan autentikasi dan otorisasi.
+
+## Soal 3 Unguided Modul 8 
+Token yang tidak pernah kedaluwarsa berbahaya apabila bocor karena pihak yang tidak berwenang dapat menggunakannya untuk mengakses endpoint API selama token tersebut belum dicabut. Hal ini dapat menyebabkan penyalahgunaan hak akses, kebocoran data, dan akses tidak sah terhadap sistem. Dengan menerapkan masa berlaku token, risiko penyalahgunaan dapat dikurangi karena token secara otomatis menjadi tidak valid setelah melewati batas waktu yang ditentukan.
+
+
+## Soal 4 Unguided Modul 8 
+Apabila perintah php artisan migrate:fresh --seed dijalankan kembali, seluruh tabel database beserta datanya akan dihapus, kemudian dibuat ulang melalui migration dan diisi kembali melalui seeder. AdminSeeder akan membaca nilai ADMIN_PASSWORD dari file .env untuk membuat akun admin.
+
+Akibatnya, kata sandi baru yang sebelumnya diubah melalui halaman ganti kata sandi akan hilang dan kata sandi admin kembali mengikuti nilai ADMIN_PASSWORD pada file .env. Oleh karena itu, apabila file .env belum diperbarui, admin harus kembali menggunakan kata sandi lama setelah proses migration dan seeding selesai.
