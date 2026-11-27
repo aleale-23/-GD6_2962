@@ -9,6 +9,9 @@ use App\Http\Controllers\LaporanController;
 Route::get('/laporan', [LaporanController::class, 'index'])
     ->name('laporan.index');
 
+Route::get('/laporan/pdf', [LaporanController::class, 'pdf'])
+    ->name('laporan.pdf');
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -41,3 +44,6 @@ Route::view('/kontak', 'kontak')->name('kontak');
 Route::get('/ping', function(){
     return ['status' => 'ok', 'aplikasi' => 'TiketWar'];
 });
+
+Route::get('/pesanan', [PesananController::class, 'index'])
+    ->name('pesanan.index');
