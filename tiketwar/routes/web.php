@@ -3,6 +3,11 @@
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\KonserController; 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaporanController;
+
+// Transaksi dan Laporan: laporan
+Route::get('/laporan', [LaporanController::class, 'index'])
+    ->name('laporan.index');
 
 Route::get('/', function () {
     return view('home');
