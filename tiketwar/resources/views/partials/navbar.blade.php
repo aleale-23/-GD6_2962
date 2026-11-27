@@ -12,6 +12,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('pesanan.index') }}">Pesanan</a>
             </li>
+            <li class="nav-item"><a class="nav-link"
+                href="{{ route('laporan.index') }}">Laporan</a></li> 
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('tentang') ? 'active' : '' }}" href="{{ route('tentang') }}">Tentang</a>
             </li>

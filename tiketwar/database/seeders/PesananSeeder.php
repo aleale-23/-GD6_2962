@@ -10,7 +10,7 @@ class PesananSeeder extends Seeder
 {
     public function run(): void
     {
-        $coldplay =$this->cariKonser('Coldplay - Music of The Spheres');
+        $coldplay = $this->cariKonser('Coldplay - Music of the Spheres');
         $dewa = $this->cariKonser('Dewa 19 - Pesta Rakyat');
         $pantai = $this->cariKonser('Festival Musik Pantai');
         $akustik = $this->cariKonser('Malam Akustik Kota');
@@ -18,18 +18,23 @@ class PesananSeeder extends Seeder
         $this->buat(
             $coldplay, 'Budi Santoso', 'budi@mail.test', 2, Pesanan::LUNAS, 6
         );
+
         $this->buat(
-            $dewa, 'Rina Wijaya',  'rina@mail.test', 4, Pesanan::LUNAS, 5
+            $dewa, 'Rina Wijaya', 'rina@mail.test', 4, Pesanan::LUNAS, 5
         );
+
         $this->buat(
             $pantai, 'Agus Pratama', 'agus@mail.test', 2, Pesanan::BATAL, 4
         );
+
         $this->buat(
             $coldplay, 'Siti Aminah', 'siti@mail.test', 1, Pesanan::MENUNGGU_BAYAR, 3
         );
+
         $this->buat(
             $akustik, 'Dewi Lestari', 'dewi@mail.test', 3, Pesanan::LUNAS, 2
         );
+
         $this->buat(
             $dewa, 'Hendra Gunawan', 'hendra@mail.test', 2, Pesanan::MENUNGGU_BAYAR, 1
         );
@@ -54,16 +59,16 @@ class PesananSeeder extends Seeder
             'email' => $email,
             'jumlah' => $jumlah,
             'harga_satuan' => $konser->harga,
-            'total' => $jumlah * $konser->harga * $jumlah,
+            'total' => $konser->harga * $jumlah,
             'status' => $status,
         ]);
+
         $pesanan->created_at = now()->subDays($hariLalu);
         $pesanan->save();
 
+        // Pesanan yang tidak batal sudah memakai stok konser.
         if ($status !== Pesanan::BATAL) {
             $konser->decrement('sisa', $jumlah);
         }
-
-        
     }
 }

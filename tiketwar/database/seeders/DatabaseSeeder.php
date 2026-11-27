@@ -6,7 +6,8 @@ use App\Models\Konser;
 use App\Models\Promotor;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder{
+class DatabaseSeeder extends Seeder
+{
     public function run(): void
     {
         $nusantara = Promotor::create([
@@ -67,12 +68,6 @@ class DatabaseSeeder extends Seeder{
             'harga' => 250000,
             'sisa' => 60,
             'tanggal' => '2027-01-30',
-        ]);
-
-        Konser::create([
-            'promotor_id' => $harmoni->id,
-            'nama' => 'Malam Akustik Kota', 'kota' => 'Bandung',
-            'harga' => 250000, 'sisa' => 60, 'tanggal' => '2027-01-30',
         ]);
 
         $this->call(PesananSeeder::class);
