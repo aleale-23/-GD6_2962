@@ -22,6 +22,7 @@ Route::post('/konser/{konser}/pesanan', [PesananController::class, 'store'])
 
 // Token admin
 Route::post('/login', [TokenController::class, 'store'])
+    ->middleware('throttle:login')
     ->name('api.login');
 
 Route::middleware('auth:sanctum')->group(function () {
