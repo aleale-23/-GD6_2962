@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('api.logout');
 
     Route::get('/admin/pesanan', [PesananController::class, 'index'])
+        ->middleware('abilities:pesanan:baca')
         ->name('api.admin.pesanan.index');
 
 });
