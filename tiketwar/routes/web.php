@@ -4,11 +4,23 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\KonserController;
 use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController; 
 
 // Halaman utama
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+// Login dan logout admin
+Route::get('/login', [AuthController::class, 'showLogin'])
+    ->middleware('guest')->name('login');
+
+Route::post('/login', [AuthController::class, 'login'])
+    ->middleware('guest')->name('login.proses');
+
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->middleware('auth')->name('logout');
+
 
 Route::view('/tentang', 'about')->name('tentang');
 
