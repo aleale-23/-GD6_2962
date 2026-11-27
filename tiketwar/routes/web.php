@@ -21,6 +21,41 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')->name('logout');
 
+// Halaman admin: wajib login
+Route::middleware('auth')->group(function () {
+    // Kelola konser
+    Route::get('/konser/create', [KonserController::class, 'create'])
+        ->name('konser.create');
+
+    Route::post('/konser', [KonserController::class, 'store'])
+        ->name('konser.store');
+
+    Route::get('/konser/{id}/edit', [KonserController::class, 'edit'])
+        ->whereNumber('id')->name('konser.edit');
+
+    Route::put('/konser/{id}', [KonserController::class, 'update'])
+        ->whereNumber('id')->name('konser.update');
+
+    Route::delete('/konser/{id}', [KonserController::class, 'destroy'])
+        ->whereNumber('id')->name('konser.destroy');
+
+    // Kelola pesanan
+    Route::get('/pesanan', [PesananController::class, 'index'])
+        ->name('pesanan.index');
+
+    Route::patch('/pesanan/{pesanan}/bayar', [PesananController::class, 'bayar'])
+        ->whereNumber('pesanan')->name('pesanan.bayar');
+
+    Route::patch('/pesanan/{pesanan}/batal', [PesananController::class, 'batal'])
+        ->whereNumber('pesanan')->name('pesanan.batal');
+
+    // Laporan
+    Route::get('/laporan', [LaporanController::class, 'index'])
+        ->name('laporan.index');
+
+    Route::get('/laporan/pdf', [LaporanController::class, 'pdf'])
+        ->name('laporan.pdf');
+});
 
 Route::view('/tentang', 'about')->name('tentang');
 
@@ -74,3 +109,4 @@ Route::get('/laporan', [LaporanController::class, 'index'])
 
 Route::get('/laporan/pdf', [LaporanController::class, 'pdf'])
     ->name('laporan.pdf');
+

@@ -40,6 +40,13 @@
                 <li class="nav-item"><a class="nav-link"
                     href="{{ route('login') }}">Login Admin</a></li>
             @endguest
+
+            @auth
+                <li class="nav-item"><a class="nav-link"
+                    href="{{ route('pesanan.index') }}">Pesanan</a></li>
+                <li class="nav-item"><a class="nav-link"
+                    href="{{ route('laporan.index') }}">Laporan</a></li>
+            @endauth
         </ul>
     </div>
 </nav>
