@@ -28,6 +28,11 @@
                     <span class="navbar-text">{{ auth()->user()->name }}</span>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('akun.password') }}">
+                        Ganti Kata Sandi
+                    </a>
+                </li>
+                <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit"
