@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\PesananController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TokenController;
+use App\Http\Controllers\Api\LaporanController as ApiLaporanController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -50,5 +51,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::patch('/pesanan/{pesanan}/batal', [PesananController::class, 'batal'])
         ->name('api.pesanan.batal');
+
+    // API laporan ringkasan admin
+    Route::get('/admin/laporan', [ApiLaporanController::class, 'index'])
+        ->name('api.admin.laporan');
 
 });
