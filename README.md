@@ -32,3 +32,9 @@ Akibatnya, kata sandi baru yang sebelumnya diubah melalui halaman ganti kata san
 Status HTTP 204 No Content digunakan karena proses penghapusan data berhasil dilakukan tanpa perlu mengembalikan isi respons kepada klien. Berbeda dengan status 200 OK yang umumnya disertai data atau pesan hasil pemrosesan, status 204 menunjukkan bahwa permintaan berhasil tetapi tidak memiliki response body. Penggunaan status 204 sesuai dengan karakteristik operasi DELETE ketika tidak ada data tambahan yang perlu dikirimkan.
 
 Konser yang sudah memiliki pesanan tidak boleh dihapus karena terdapat hubungan antara tabel konsers dan tabel pesanans melalui foreign key konser_id. Apabila konser tersebut dihapus, data pesanan akan kehilangan referensi terhadap konser yang dipesan. Hal tersebut dapat mengganggu integritas database, riwayat transaksi, dan laporan penjualan. Oleh karena itu, sistem menolak penghapusan konser yang memiliki pesanan menggunakan status HTTP 409 Conflict.
+
+
+## Soal 6 Unguided Modul 8 
+Status pesanan harus diperiksa di dalam transaksi setelah menggunakan lockForUpdate() untuk memastikan bahwa data yang diperiksa merupakan data terbaru dan tidak dapat diubah oleh transaksi lain selama proses berlangsung. Jika pemeriksaan status dilakukan sebelum baris dikunci, dua permintaan yang berjalan secara bersamaan dapat membaca status yang sama, yaitu menunggu_bayar, sehingga keduanya dapat memproses pembatalan dan mengembalikan stok tiket sebanyak dua kali.
+
+Penggunaan DB::transaction() dan lockForUpdate() mencegah kondisi tersebut karena permintaan berikutnya harus menunggu transaksi sebelumnya selesai. Setelah memperoleh kunci, permintaan berikutnya membaca status terbaru dan ditolak apabila pesanan sudah berstatus lunas atau batal. Dengan demikian, konsistensi status pesanan dan stok tiket tetap terjaga.

@@ -44,4 +44,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/konser/{konser}', [KonserController::class, 'destroy'])
         ->name('api.konser.destroy');
 
+    // API bayar dan batal pesanan
+    Route::patch('/pesanan/{pesanan}/bayar', [PesananController::class, 'bayar'])
+        ->name('api.pesanan.bayar');
+
+    Route::patch('/pesanan/{pesanan}/batal', [PesananController::class, 'batal'])
+        ->name('api.pesanan.batal');
+
 });
